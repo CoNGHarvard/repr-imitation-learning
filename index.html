@@ -6,7 +6,7 @@
         content="Skills Transfer and Discovery for Sim-to-Real Learning: A Representation-Based Viewpoint">
   <meta name="keywords" content="STEADY, Sim-to-Real">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>STEADY: Skill Tranfer and Discovery for Sim-to-Real Learning </title>
+  <title>Offline Imitation Learning upon Sub-optimal Demonstrations by Primal-Dual Representation </title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -91,15 +91,18 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Skills Transfer and Discovery for Sim-to-Real Learning: A Representation-Based Viewpoint </h1>
+          <h1 class="title is-1 publication-title">Offline Imitation Learning upon Sub-optimal Demonstrations by Primal-Dual Representation </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://scholar.harvard.edu/haitongma">Haitong Ma</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=n3j8fi0AAAAJ&hl=en">Zhaolin Ren</a><sup>1</sup>,</span>
-            <span class="author-block">
               <a href="https://bo-dai.github.io/">Bo Dai</a><sup>2</sup>,
             </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=n3j8fi0AAAAJ&hl=en">Zhaolin Ren</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=n3j8fi0AAAAJ&hl=en">Yebin Wang</a><sup>3</sup>,</span>
+              
             <span class="author-block">
               <a href="https://nali.seas.harvard.edu/">Na Li</a><sup>1</sup>
             </span>
@@ -108,13 +111,14 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Harvard Unviersity,</span>
             <span class="author-block"><sup>2</sup>Georgia Institute of Techology</span>
+            <span class="author-block"><sup>3</sup>MERL</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://scholar.harvard.edu/sites/scholar.harvard.edu/files/haitongma/files/transfer_learning_online_report.pdf"
+                <a href="https://scholar.harvard.edu/haitongma/files/repr-il-online-report.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -143,12 +147,12 @@
               </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/mahaitongdae/quad_sim.git"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <span>Code: to be published soon</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
@@ -244,32 +248,26 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We study skill transfer and discovery in the context of robotics control 
-            using representation learning.
+            In this paper, we explore representation learning for offline imitation learning (IL), 
+            where an agent aims to mimic an unknown expert policy using an offline dataset containing expert demonstrations 
+            and non-expert (sub-optimal) trajectories. The IL is formulated as a distribution-matching problem between behavior and expert trajectories. 
           </p>
           <p>
-            We draw inspiration from the analysis of spectral decomposition of Markov Decision Processes, 
-            where representations coming from the spectral decomposition of transition dynamics can be regarded as skill sets. 
-            The representations can linearly represent the state-action value function induced by any policies, 
-            thus enabling the transferability of the representation-based skill sets across arbitrary tasks 
-            with the same transition dynamics. 
+            To better extract useful information from sub-optimal trajectories and mitigate overfitting in IL,
+            we exploit the representation learning via primal-dual spectral factorization of system dynamics, 
+            which can be learned from all data sharing the same transition dynamics. 
+            The proposed IL algorithm includes representation learning at a pre-training stage and then IL on the representation space at the main stage.
           </p>
           <p>
-            Moreover, to handle the sim-to-real gap in the dynamics, 
-            we propose a skill discovery algorithm that learns new skills induced by the sim-to-real gap from real-world data. 
-            We encourage discovery of new skills by enforcing orthogonal constraints between the skills to learn and the skills 
-            from simulators, and then synthesize the policy using the combined skill sets. 
-            We demonstrate our methodologies by transferring quadrotor controllers from simulators to Crazyflie 2.1 quadrotors. 
-            We show that we can learn the representations from a single simulator task and transfer these to multiple different 
-            real-world tasks including hovering, taking off, landing and trajectory tracking. 
-            Our skill discovery approach helps narrow the sim-to-real gap and improve the real-world controller performance.
+            Experiments on MuJoCo and real quadrupeds show that the proposed algorithm has less overfitting and better generalization, and can reuse supplementary random
+            data to learn representations and improve algorithm performance.
           </p>
         </div>
       </div>
     </div>
     <!--/ Abstract. -->
 
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Overview of the STEADY Framework</h2>
         
@@ -280,22 +278,22 @@
         </p>
       </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Video - Takeoff, Hovering and Landing</h2>
+        <h2 class="title is-3">Implementations on the Unitree Go2 Quadrupeds</h2>
         <div class="publication-video">
-          <iframe src="https://scholar.harvard.edu/sites/scholar.harvard.edu/files/haitongma/files/sim_to_real_v2.mp4"
+          <iframe src="https://scholar.harvard.edu/sites/scholar.harvard.edu/files/haitongma/files/repr_il_video.mp4"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
     </div>
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <h3 class="title is-3">Snapshots and Trajctories</h3>
-    </div>
-    <div class="columns is-centered has-text-centered">
+    </div> -->
+    <!-- <div class="columns is-centered has-text-centered">
       <div>
       </div>
       <div class="column is-one-quarter">
@@ -322,10 +320,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <!--/ Paper video. -->
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h3 class="title is-3">Video - Trajectory Tracking</h2>
         <div class="publication-video">
@@ -333,7 +331,8 @@
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
-    </div>
+    </div> -->
+    <h2 class="title is-3">More details to be added!</h2>
   </div>
 </div>
 
@@ -344,8 +343,8 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@article{ma2024skilltransfer,
-  author    = {Ma, Haitong and Ren, Zhaolin and Dai, Bo and Li, Na},
-  title     = {Skill Transfer and Discovery for Sim-to-Real Learning: A Representation-Based Viewpoint},
+  author    = {Ma, Haitong and Dai, Bo and Ren, Zhaolin and Wang, Yebin and Li, Na},
+  title     = {Offline Imitation Learning upon Sub-optimal Demonstrations by Primal-Dual Representation},
   journal   = {technical report},
   year      = {2024},
 }</code></pre>
