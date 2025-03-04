@@ -1,5 +1,6 @@
 body {
-  font-family: 'Lexend', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
 }
 
 
@@ -48,11 +49,12 @@ body {
 }
 
 .publication-title {
-    font-family: 'Lexend', sans-serif;
+    font-family: 'Lora', sans-serif;
 }
   
 .publication-authors {
-    font-family: 'Lexend', sans-serif;
+    font-family: 'Lora', sans-serif;
+    font-weight: bold;
 }
 
 .publication-venue {

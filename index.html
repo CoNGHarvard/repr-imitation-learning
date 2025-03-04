@@ -35,12 +35,36 @@
   <link rel="icon" href="./static/images/favicon.svg">
   <link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
   <link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lexend">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+        tex: {
+            macros: {
+                rbr: ["\\left({#1}\\right)", 1],  // Bold italic text (1 argument)
+                sbr: ["\\left[{#1}\\right]", 1],  // Bold italic text (1 argument)
+                EE: "\\mathbb{E}",
+                dpi: "d",
+                boldit: ["\\boldsymbol{#1}", 1],  // Bold italic text (1 argument)
+                vec: ["\\mathbf{#1}", 1],  // Bold vector notation (1 argument)
+                st: "\\text{s.t.\ }",
+                Pcal: "\\mathcal{P}",
+                Scal: "\\mathcal{S}",
+                Acal: "\\mathcal{A}"
+            }
+        }
+    };
+  </script> 
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js">
+  </script>
   <link rel="'icon" href="./static/images/favicon.svg">
 </head>
 <body>
@@ -88,7 +112,28 @@
 
 <section class="hero">
   <div class="hero-body">
+    
     <div class="container is-max-desktop">
+      <div class="colum is-centered">
+        <div class="columns is-centered has-text-centered">
+          <div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="content has-text-justified">
+              <img src="static/images/SEAS_Logo_RGB.png" alt="Harvard" style="vertical-align:middle;margin:10px 0px">
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="content has-text-justified">
+              <img src="static/images/GeorgiaTech_RGB_0.png" alt="Georgia Tech">
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="content has-text-justified">
+              <img src="static/images/merl.png" alt="MERL" style="vertical-align:middle;margin:20px 0px">
+            </div>
+          </div>
+      </div>
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Offline Imitation Learning upon Arbitrary Demonstrations by Pre-Training Dynamics Representations  </h1>
@@ -110,8 +155,8 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Harvard Unviersity,</span>
-            <span class="author-block"><sup>2</sup>Georgia Institute of Techology</span>
-            <span class="author-block"><sup>3</sup>MERL</span>
+            <span class="author-block"><sup>2</sup>Georgia Institute of Techology</span> <br>
+            <span class="author-block"><sup>3</sup>Mitsubishi Electric Research Laboratories</span>
           </div>
 
           <div class="column has-text-centered">
@@ -249,7 +294,7 @@
         <div class="content has-text-justified">
           <p>
             Limited data has become a major bottleneck in scaling up offline imitation learning (IL).
-            In this paper, we propose enhancing IL performance under limited expert data by introducing a pre-training stage that learns \emph{dynamics representations}, derived from factorizations of the transition dynamics. 
+            In this paper, we propose enhancing IL performance under limited expert data by introducing a pre-training stage that learns <strong>dynamics representations</strong>, derived from factorizations of the transition dynamics. 
           </p>
           <p>
             We first theoretically justify that the optimal decision variable of offline IL lies in the representation space, significantly reducing the parameters to learn in the downstream IL. Moreover, 
@@ -269,23 +314,51 @@
 
     <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview of the STEADY Framework</h2>
+        <div class="content has-text-justified">
+          <h2 class="title is-8">1. Offline Imitation Learning</h2>
+          <p>
+            Consider MDP \(\mathcal{M} = \langle\Scal,\Acal,\rho,\gamma \rangle\) with state space \(\Scal\), action space \(\Acal\), initial distribution \(\rho\) and discounted factor \(\gamma\). 
+            We consider offline IL using <strong>distribution matching</strong>, which is defined over the state-action visitation density,
+            $$
+            d^\pi(s):=(1-\gamma) \sum_{t=0}^{\infty} \gamma^t \operatorname{Pr}(s_t=s\mid s_0 \sim \rho,
+            a_t \sim \pi\left(s_t\right), s_{t+1} \sim P\left(\cdot\mid s_t, a_t\right),\forall t).
+            $$
+          </p>
+          <p>
+            Assume we have an expert dataset \(\mathcal{D}^{\exp}\) sampled from distribution \(d^{\exp}:\Delta\rbr{\Scal}\times\Delta\rbr{\Acal}\)
+          </p>
+
+          We model the offline imitation learning as distribution matching problems,
+          $$
+          \begin{aligned}
+          \min_{\pi, \dpi} &~  D_{f}\rbr{\dpi\| d^{\exp }}   = \EE_{(s, a)\sim d^{\exp}} \sbr{f\rbr{\frac{\dpi(s, a)}{d^{\exp}(s, a)}}}  \\ % \log\frac{\dpi(s)}{d^{\exp }(s)}
+          % \text{s.t.} & ~ \text{reverse recursion constraints in \eqref{eq:dsa_recursion}}
+          \st &~ \dpi\rbr{s', a'} = (1-\gamma) \rho\left(s'\right)\pi(a'| s')+\gamma\Pcal^\pi_* \dpi\rbr{s', a'}, \forall \rbr{s', a'}\in\Scal\times\Acal.
+          \end{aligned} 
+          $$
+        </div>
+      </div>
+    </div> -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview of the Imitation Learning Framework</h2>
         
       <div class="content has-text-centered">
         
         <p>
-          <img src="static/images/structure.png" alt="STEADY structure">
+          <img src="static/images/demo.png" alt="repr-il structure">
         </p>
       </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Implementations on the Unitree Go2 Quadrupeds</h2>
         <div class="publication-video">
-          <iframe src="https://scholar.harvard.edu/sites/scholar.harvard.edu/files/haitongma/files/repr_il_video.mp4"
+          <iframe src="https://scholar.harvard.edu/sites/scholar.harvard.edu/files/haitongma/files/repr_il_video_v2.mp4"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
@@ -332,7 +405,6 @@
         </div>
       </div>
     </div> -->
-    <h2 class="title is-3">More details to be added!</h2>
   </div>
 </div>
 
