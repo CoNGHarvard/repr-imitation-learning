@@ -6,7 +6,7 @@
         content="Skills Transfer and Discovery for Sim-to-Real Learning: A Representation-Based Viewpoint">
   <meta name="keywords" content="STEADY, Sim-to-Real">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Offline Imitation Learning upon Sub-optimal Demonstrations by Primal-Dual Representation </title>
+  <title>Offline Imitation Learning upon Arbitrary Demonstrations by Pre-Training Dynamics Representations </title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -91,7 +91,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Offline Imitation Learning upon Sub-optimal Demonstrations by Primal-Dual Representation </h1>
+          <h1 class="title is-1 publication-title">Offline Imitation Learning upon Arbitrary Demonstrations by Pre-Training Dynamics Representations  </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://scholar.harvard.edu/haitongma">Haitong Ma</a><sup>1</sup>,</span>
@@ -248,20 +248,20 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            In this paper, we explore representation learning for offline imitation learning (IL), 
-            where an agent aims to mimic an unknown expert policy using an offline dataset containing expert demonstrations 
-            and non-expert (sub-optimal) trajectories. The IL is formulated as a distribution-matching problem between behavior and expert trajectories. 
+            Limited data has become a major bottleneck in scaling up offline imitation learning (IL).
+            In this paper, we propose enhancing IL performance under limited expert data by introducing a pre-training stage that learns \emph{dynamics representations}, derived from factorizations of the transition dynamics. 
           </p>
           <p>
-            To better extract useful information from sub-optimal trajectories and mitigate overfitting in IL,
-            we exploit the representation learning via primal-dual spectral factorization of system dynamics, 
-            which can be learned from all data sharing the same transition dynamics. 
-            The proposed IL algorithm includes representation learning at a pre-training stage and then IL on the representation space at the main stage.
+            We first theoretically justify that the optimal decision variable of offline IL lies in the representation space, significantly reducing the parameters to learn in the downstream IL. Moreover, 
+            the dynamics representations can be learned from arbitrary data collected with the same dynamics, allowing the reuse of massive non-expert data and mitigating the limited data issues. 
           </p>
+          
           <p>
-            Experiments on MuJoCo and real quadrupeds show that the proposed algorithm has less overfitting and better generalization, and can reuse supplementary random
-            data to learn representations and improve algorithm performance.
+            We present a tractable loss function inspired by noise contrastive estimation to learn the dynamics representations at the pre-training stage.
+            Experiments on MuJoCo demonstrate that our proposed algorithm can mimic expert policies with as few as a single trajectory. 
+            Experiments on real quadrupeds show that we can leverage pre-trained dynamics representations from simulator data to learn to walk from a few real-world demonstrations.
           </p>
+            
         </div>
       </div>
     </div>
